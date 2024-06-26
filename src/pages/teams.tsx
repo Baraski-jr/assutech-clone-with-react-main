@@ -54,8 +54,6 @@ const Team = () => {
     </div>
   ); 
 };
-export default Team;
-function useState<T>(arg0: any[]): [any, any] {
-  throw new Error("Function not implemented.");
-}
 
+
+export default Team;
