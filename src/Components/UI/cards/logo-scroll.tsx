@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,28 +25,26 @@ interface Partner {
 
 
 const QUERY =  gql`
-query GetProjects {
-  partnersLogoCollection {
-    items {
-      sys {id}
-      name
-      picture { url }
+  query GetProjects {
+    partnersLogoCollection {
+      items {
+        sys {id}
+        name
+        picture { url }
+      }
     }
   }
-}
 `
 
 const ScrollLogos = () => {
   const {data, error} = useQuery(QUERY)
-
-
+  const partnersLogo = data? data.partnersLogoCollection.items : [] as Partner[]
 
   if (error) {
     console.log(error)
   }
   else {
-    // console.log(data.partnersLogoCollection)
-    console.log(data.partnersLogoCollection.items)
+    console.log(partnersLogo)
   }
 
 
@@ -71,7 +68,7 @@ const ScrollLogos = () => {
         </h2>
         <Slider {...settings} className="w-full space-x-2 overflow-x-hidden px-1 py-3 md:px-[0]">
           {
-            data.partnersLogoCollection.items.map(({picture, name}: Partner) => (
+            partnersLogo.map(({picture, name}: Partner) => (
                 <img key={name} className="max-w-10 max-h-14 object-contain md:max-w-[8rem]" src={picture.url} alt={name} />
             ))
           }
