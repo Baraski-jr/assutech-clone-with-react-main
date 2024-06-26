@@ -1,7 +1,7 @@
 {
-  "homepage": "http://Baraski-jr.github.io/Assutech-clone-with-react-main",
+  "homepage": "http://Baraski-jr.github.io/assutech-clone-with-react-main",
   "name": "assutech",
-  "private": true,
+  "private": true, 
   "version": "0.0.0",
   "type": "module",
   "scripts": {
