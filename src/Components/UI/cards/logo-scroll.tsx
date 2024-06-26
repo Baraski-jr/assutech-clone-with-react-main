@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { gql } from "@apollo/client/core";
+import { useQuery } from "@apollo/client";
 interface Settings {
   dots: boolean;
   infinite: boolean;
@@ -13,13 +15,42 @@ interface Settings {
   cssEase: string;
 }
 interface Partner {
-  id: number;
+  sys : {
+    id : string
+  }
   name: string;
-  url: string
+  picture: {
+    url: string;
+  }
 }
 
+
+const QUERY =  gql`
+query GetProjects {
+  partnersLogoCollection {
+    items {
+      sys {id}
+      name
+      picture { url }
+    }
+  }
+}
+`
+
 const ScrollLogos = () => {
-  // Define the Setting
+  const {data, error} = useQuery(QUERY)
+
+
+
+  if (error) {
+    console.log(error)
+  }
+  else {
+    // console.log(data.partnersLogoCollection)
+    console.log(data.partnersLogoCollection.items)
+  }
+
+
   const settings: Settings = {
     dots: false,
     infinite: true,
@@ -31,16 +62,6 @@ const ScrollLogos = () => {
     cssEase: "linear"
   };
 
-  const [partners, setLpartners] = useState<Partner[]>([]);
-  const url: string = "http://localhost:3000/partners-logo";
-  useEffect(() => {
-    const FetchData = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setLpartners(data);
-    };
-    FetchData();
-  }, []);
   return (
     <div className="space-y-2 py-2 md:px-7 md:py-6">
       <h3 className="px-2 text-sm font-semibold md:hidden">Trusted by</h3>
@@ -50,8 +71,8 @@ const ScrollLogos = () => {
         </h2>
         <Slider {...settings} className="w-full space-x-2 overflow-x-hidden px-1 py-3 md:px-[0]">
           {
-            partners.map(({id, url, name}) => (
-                <img key={id} className="max-w-10 max-h-14 object-contain md:max-w-[8rem]" src={url} alt={name} />
+            data.partnersLogoCollection.items.map(({picture, name}: Partner) => (
+                <img key={name} className="max-w-10 max-h-14 object-contain md:max-w-[8rem]" src={picture.url} alt={name} />
             ))
           }
         </Slider>
