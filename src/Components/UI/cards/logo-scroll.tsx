@@ -23,7 +23,6 @@ interface Partner {
   }
 }
 
-
 const QUERY =  gql`
   query GetProjects {
     partnersLogoCollection {
@@ -43,10 +42,6 @@ const ScrollLogos = () => {
   if (error) {
     console.log(error)
   }
-  else {
-    console.log(partnersLogo)
-  }
-
 
   const settings: Settings = {
     dots: false,

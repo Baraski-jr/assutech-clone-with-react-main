@@ -28,10 +28,6 @@ const Projects = () => {
   const {data, error, loading} = useQuery(QUERY)
 
   if(error) { console.log(error) }
-  else {
-    console.log(data?.assutechCaseStudiesCollection.items)
-    
-  }
 
   return (
     <div className="min-h-[95vh] space-y-1">
