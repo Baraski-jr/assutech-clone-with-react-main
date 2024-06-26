@@ -1,21 +1,37 @@
-import { useEffect, useState } from "react";
 import ProjectCard from "../Components/UI/cards/project-card";
 import Hero from "../Components/UI/hero/hero";
+import { gql } from "@apollo/client/core";
+import { useQuery } from "@apollo/client";
+import { ProjectCardSkeleton } from "../Components/UI/skeleton/member-card-skeleton";
+
+
+const QUERY =  gql`
+query GetProjects {
+  assutechCaseStudiesCollection {
+    items {
+    sys {
+      id
+    }
+    solutionPicture {
+      url
+    }
+      mainTitle
+      subTitle
+      urls
+      tags
+    }
+  } 
+}
+`
 
 const Projects = () => {
-  const url: string = "http://localhost:3000/projects";
-  const [projects, setProjects] = useState<ProjectCard[]>([]);
+  const {data, error, loading} = useQuery(QUERY)
 
-  useEffect(() => {
-    const FetchData = async (url: string) => {
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data.cards)
-      setProjects(data.cards);
-    }
-
-    FetchData(url);
-  }, [])
+  if(error) { console.log(error) }
+  else {
+    console.log(data?.assutechCaseStudiesCollection.items)
+    
+  }
 
   return (
     <div className="min-h-[95vh] space-y-1">
@@ -25,11 +41,16 @@ const Projects = () => {
       
       {/* Cards section */}
       <section className="container w-[80%] md:w-[90%] md:max-w-[74rem] lg:max-w-[90rem] mx-auto py-5 md:py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="">
           {
-            projects.map(({id, name, describ, image, url, tags}:ProjectCard) => (
-              <ProjectCard key={id} id={id} name={name} describ={describ} image={image} url={url} tags={tags} />
-            ))
+            loading ? <ProjectCardSkeleton /> :
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+              {
+                data?.assutechCaseStudiesCollection.items.map(({mainTitle, subTitle, solutionPicture, urls, tags}:ProjectCard) => (
+                <ProjectCard key={mainTitle}  mainTitle={mainTitle} subTitle={subTitle} solutionPicture={solutionPicture} urls={urls} tags={tags} />
+                ))
+              }
+            </div>
           }
         </div>
       </section>

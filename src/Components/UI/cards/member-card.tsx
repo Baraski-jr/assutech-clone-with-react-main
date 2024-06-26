@@ -1,16 +1,20 @@
 import { useState } from "react";
 
 interface MemberCard {
-    isLoading?: boolean;
-    id: string;
-    picture: string;
-    name: string;
-    role: string; 
-    degree: string;
-    description: string;
+    sys?: {
+        id: string;
+      };
+      picture: {
+        url: string;
+      };
+      name: string;
+      role: string;
+      degree: string;
+      description: string;    
 }
 
-const MemberCard  = ({isLoading, id, name, picture, role, degree, description}:MemberCard) => {
+
+const MemberCard  = ({name, picture, role, degree, description}:MemberCard) => {
     
     const [open, setOpen] = useState(true);
 
@@ -20,9 +24,9 @@ const MemberCard  = ({isLoading, id, name, picture, role, degree, description}:M
 
     return (
         <div className="">
-            <figure key={id} className="text-white-1 md:h-[22rem] h-full  relative mx-auto w-[90%] md:w-full max-w-[25rem]">
+            <figure key={name} className="text-white-1 md:h-[22rem] h-full  relative mx-auto w-[90%] md:w-full max-w-[25rem]">
                 <div className="">
-                    <img className="w-full md:h-[22rem] h-full object-cover object-top" src={picture} alt={name} />
+                    <img className="w-full md:h-[22rem] h-full object-cover object-top" src={picture.url} alt={name} />
                 </div>
                 <figcaption className="bg-primary md:bg-none md:opacity-0 md:hover:opacity-100 transition-all duration-500">
                     <div className="py-4 px-10 w-full md:h-[22rem] h-full md:opacity-80  md:bg-primary md:absolute md:top-0 md:flex md:flex-col md:pt-[9rem] space-y-2 md:space-y-3 text-center">
@@ -47,7 +51,7 @@ const MemberCard  = ({isLoading, id, name, picture, role, degree, description}:M
                     </div>
                     <figure className="flex flex-col items-center justify-center my-4 mx-5 space-y-4 ">
                         <div className="">
-                            <img className="w-[10rem] h-[10rem] rounded-full object-cover object-top" src={picture} alt={name} />
+                            <img className="w-[10rem] h-[10rem] rounded-full object-cover object-top" src={picture.url} alt={name} />
                         </div>
                         <figcaption className="text-secondary text-center space-y-4">
                             <div className="font-bold text-base">
