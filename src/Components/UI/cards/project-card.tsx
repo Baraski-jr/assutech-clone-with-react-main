@@ -20,7 +20,6 @@ const ProjectCard = ({mainTitle, subTitle, solutionPicture, urls, tags, loading}
                         loading ?  <ImageSkeleton />
                             : ( <img src={solutionPicture.url} alt={mainTitle} className="w-[95%] h-[10rem] mx-auto object-cover object-top" /> )
                     }
-                <img src={solutionPicture.url} alt={mainTitle} className="w-[95%] h-[10rem] mx-auto object-cover object-top" />
                 <figcaption className="px-3 divide-y-[0.1px] bg-secondary">
                     <div className="py-4 space-y-2">
                         <h2 className="text-thirdairy font-semibold text-2xl"> {mainTitle} </h2>
