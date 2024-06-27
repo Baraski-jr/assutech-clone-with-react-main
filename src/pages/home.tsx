@@ -6,24 +6,36 @@ import ScrollLogos from "../Components/UI/cards/logo-scroll";
 import CenterHeader from "../Components/UI/section-header/center";
 import LeftHeader from "../Components/UI/section-header/left";
 import think from "../assets/Background/think.webp";
-import { useEffect, useState } from "react";
 import RecentProductCard from "../Components/UI/cards/recent-product-card";
 import ContactForm from "../Components/UI/cards/contact-form";
+import { gql, useQuery } from "@apollo/client";
+
+const QUERY = gql`
+  query {
+    blogPostCollection {
+      items {
+          sys { id }
+          title
+          url
+          cover { url }
+          date
+          tags
+          author {
+              picture { url }
+              name
+              role
+              companyName
+          }
+      }
+  }
+}
+` 
 
 const Home = () => {
-  
-  const url: string = "http://localhost:3000/blogs";
-  const [blogs, setBlosgs] = useState<BlogCard[]>([]);
+  const {data} = useQuery(QUERY)
+  const blogs =  data? data. blogPostCollection.items : []
+  const limitedblogs = blogs.slice(0, 3);
 
-  useEffect(() => {
-    const FetchData = async (url: string) => {
-      const response = await fetch(url);
-      const data = await response.json()
-      setBlosgs((data.cards).slice(0,3))   
-    }
-    FetchData(url)
-  }, [])
-  
   return ( 
     <main>
       {/* // Hero Section */}
@@ -130,12 +142,11 @@ const Home = () => {
                 </div>
                 <div className="mt-3">
                   <div className="flex flex-wrap lg:flex-nowrap md:flex-wrap gap-5 lg:gap-5">
-                    {
-                      blogs.map(({id, title, image, url, tags, poster}:BlogCard) => (
-                        <BlogCard key={id} id={id} title={title} image={image} tags={tags} poster={poster} url={url} />
-                      ))
-                    }
-
+                  {
+                    limitedblogs.map(({sys, title, cover, url, tags, date, author}:BlogCard) => (
+                        <BlogCard key={sys?.id} title={title} cover={cover} tags={tags} author={author} url={url} date={date} />
+                    ))
+                  }
                   </div>
                 </div>
                 <div className="md:hidden py-5 relative -left-5">

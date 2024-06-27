@@ -43,7 +43,7 @@ const Projects = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
               {
                 data?.assutechCaseStudiesCollection.items.map(({mainTitle, subTitle, solutionPicture, urls, tags}:ProjectCard) => (
-                <ProjectCard key={mainTitle}  mainTitle={mainTitle} subTitle={subTitle} solutionPicture={solutionPicture} urls={urls} tags={tags} />
+                <ProjectCard key={mainTitle}  mainTitle={mainTitle} subTitle={subTitle} solutionPicture={solutionPicture} urls={urls} tags={tags} loading={loading} />
                 ))
               }
             </div>

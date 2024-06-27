@@ -1,31 +1,47 @@
-import { useEffect, useState } from "react";
+import { gql } from "@apollo/client/core";
 import BlogCard from "../Components/UI/cards/blog-card";
 import Hero from "../Components/UI/hero/hero";
+import { useQuery } from "@apollo/client";
 
+const QUERY = gql`
+query {
+  blogPostCollection {
+    items {
+      sys { id }
+      title
+      url
+      cover { url }
+      date
+      tags
+      author {
+        name
+        picture { url }
+        role
+        companyName
+      }
+    }
+  }
+}
+` 
 
 const Blogs = () => {
-  const url: string = "http://localhost:3000/blogs";
-  const [blogs, setBlosgs] = useState<BlogCard[]>([]);
+  const {data, error, loading} = useQuery(QUERY);
+  if (error) {console.log(error)}
 
-  useEffect(() => {
-      const FetchData = async (url: string) => {
-        const response = await fetch(url);
-        const data = await response.json()
-        setBlosgs(data.cards)   
-        console.log(data.cards[0].poster)
-      }
-      FetchData(url)
-    }, [])
+  console.log(data)
+
+  const blogs = data? data. blogPostCollection.items : [];
+
   return (
     <div className="min-h-[95vh] space-y-1">
       <section>
         <Hero mainTitle={"Tech Talks"} subTitle={"We distill the Trends, Thoughts and Technologies."} />
       </section>
       <section className="container w-[95%] md:w-[90%] md:max-w-[74rem] lg:max-w-[90rem] mx-auto py-12">
-        <div className="flex flex-wrap gap-5 lg:gap-8">
+        <div className="flex flex-wrap gap-5 lg:gap-4">
           {
-            blogs.map(({id, title, image, url, tags, poster}:BlogCard) => (
-                <BlogCard key={id} id={id} title={title} image={image} tags={tags} poster={poster} url={url} />
+            blogs.map(({sys, title, cover, url, tags, date, author}:BlogCard) => (
+                <BlogCard key={sys?.id} title={title} cover={cover} tags={tags} author={author} url={url} date={date} loading={loading} />
             ))
           }
         </div>

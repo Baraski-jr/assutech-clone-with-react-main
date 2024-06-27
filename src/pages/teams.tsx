@@ -43,7 +43,7 @@ const Team = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {
               data?.assutechTeamsCollection?.items.map(({ name, picture, role, degree, description}:MemberCard) => (
-                <MemberCard key={name} name={name} picture={picture} role={role} degree={degree} description={description}/>
+                <MemberCard key={name} name={name} picture={picture} role={role} degree={degree} description={description} loading={loading}/>
               ))
             }
         </div>

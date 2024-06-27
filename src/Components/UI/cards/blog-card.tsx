@@ -1,30 +1,45 @@
 import { Link } from "react-router-dom";
+import { ImageSkeleton } from "../skeleton/member-card-skeleton";
 
 interface BlogCard {
-    id: number;
+    loading?: boolean;
+    sys?: {
+        id: string;
+    }
     title: string;
-    image: string;
     url: string;
+    cover: {
+        url: string;
+    }
+    date: string;
     tags: string[];
-    poster: {
+    author: {
+      picture: {
+        url: string;
+      }
       name: string;
       role: string;
-      company: string;
+      companyName: string;
     }
   }
-const BlogCard = ({id, title, image, url, tags, poster}: BlogCard) => {
+
+
+const BlogCard = ({ title, cover, url, tags, date, author, loading}:BlogCard) => {
 
     return (
-        <Link to={url}  key={id} className="bg-secondary flex-1 shadow-md w-full mx-auto md:mx-0 max-w-[30rem] md:max-w-[20rem] lg:max-w-[25rem] min-w-[20rem] md:w-[30%] lg:w-4/3">
+        <Link to={url} className="bg-secondary flex-1 shadow-md w-full mx-auto md:mx-0 max-w-[30rem] md:max-w-[20rem] lg:max-w-[25rem] min-w-[20rem] md:w-[30%] lg:w-4/3">
             <figure>
                 <div className="">
-                    <img src={image} alt="blog poster" className="max-h-[10rem] w-full object-cover object-top" />
+                    {
+                        loading ?  <ImageSkeleton />
+                            : (<img src={cover.url} alt="blog poster" className="max-h-[10rem] w-full object-cover object-top" />)
+                    }
                 </div>
                 <figcaption className="py-5 px-8  space-y-5 h-full">
                     <div className="flex flex-wrap gap-2">
                         {
                             tags?.map((tag:string) => (
-                                <p key={tag} className="bg-fourth text-slate-800 text-xs font-thin py-1 px-2">{tag}</p>
+                                <p key={tag} className="bg-fourth text-slate-800 text-[.7rem] font-thin py-1 px-2">{tag}</p>
                             ))
                         }
                     </div>
@@ -33,14 +48,11 @@ const BlogCard = ({id, title, image, url, tags, poster}: BlogCard) => {
                     </div>
                     <div className="space-y-2">
                         <div className="text-sm font-medium">
-                            <p>By {poster.name} </p>
+                            <p>By {author.name} </p>
                         </div>
-                        <div className="flex space-x-1 text-xs font-semibold text-gray-400">
-                            <p>{poster.company}, {poster.role} </p>
-                            <div className="flex space-x-1">
-                                <span>·</span>
-                                <p>June 02, 2023</p>
-                            </div>
+                        <div className="flex text-[.8rem] text-gray-400">
+                            <p className=""> {author.role} ,{author.companyName} </p>
+                            <p className="capitalize"> <span className="pr-0">·</span> {date.slice(0,10)}</p>
                         </div>
                     </div>
                 </figcaption>

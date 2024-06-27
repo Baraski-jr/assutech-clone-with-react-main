@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { ImageSkeleton } from "../skeleton/member-card-skeleton";
 
 interface MemberCard {
+    loading?: boolean;
     sys?: {
         id: string;
       };
@@ -13,11 +15,9 @@ interface MemberCard {
       description: string;    
 }
 
-
-const MemberCard  = ({name, picture, role, degree, description}:MemberCard) => {
+const MemberCard  = ({name, picture, role, degree, description, loading}:MemberCard) => {
     
     const [open, setOpen] = useState(true);
-
     const open_toggle = () => {
         setOpen(!open);
     }
@@ -26,7 +26,11 @@ const MemberCard  = ({name, picture, role, degree, description}:MemberCard) => {
         <div className="">
             <figure key={name} className="text-white-1 md:h-[22rem] h-full  relative mx-auto w-[90%] md:w-full max-w-[25rem]">
                 <div className="">
-                    <img className="w-full md:h-[22rem] h-full object-cover object-top" src={picture.url} alt={name} />
+                    {
+                        loading ?  <ImageSkeleton />
+                            : (<img className="w-full md:h-[22rem] h-full object-cover object-top" src={picture.url} alt={name} />)
+                    }
+                    
                 </div>
                 <figcaption className="bg-primary md:bg-none md:opacity-0 md:hover:opacity-100 transition-all duration-500">
                     <div className="py-4 px-10 w-full md:h-[22rem] h-full md:opacity-80  md:bg-primary md:absolute md:top-0 md:flex md:flex-col md:pt-[9rem] space-y-2 md:space-y-3 text-center">

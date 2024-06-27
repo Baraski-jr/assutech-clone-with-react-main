@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { ImageSkeleton } from "../skeleton/member-card-skeleton";
 
 interface ProjectCard {
+  loading?: boolean;
   mainTitle: string;
   subTitle: string;
   solutionPicture: {
@@ -9,11 +11,15 @@ interface ProjectCard {
   urls: string;
   tags: string[];
 }
-const ProjectCard = ({mainTitle, subTitle, solutionPicture, urls, tags}: ProjectCard) => {
+const ProjectCard = ({mainTitle, subTitle, solutionPicture, urls, tags, loading}: ProjectCard) => {
     
     return (
         <Link to={urls} className="block shadow-lg" >
             <figure className="bg-gray-100">
+                    {
+                        loading ?  <ImageSkeleton />
+                            : ( <img src={solutionPicture.url} alt={mainTitle} className="w-[95%] h-[10rem] mx-auto object-cover object-top" /> )
+                    }
                 <img src={solutionPicture.url} alt={mainTitle} className="w-[95%] h-[10rem] mx-auto object-cover object-top" />
                 <figcaption className="px-3 divide-y-[0.1px] bg-secondary">
                     <div className="py-4 space-y-2">
