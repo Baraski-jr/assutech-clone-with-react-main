@@ -64,7 +64,7 @@ const ScrollLogos = () => {
         <Slider {...settings} className="w-full space-x-2 overflow-x-hidden px-1 py-3 md:px-[0]">
           {
             partnersLogo.map(({picture, name}: Partner) => (
-                <img key={name} className="max-w-10 max-h-14 object-contain md:max-w-[8rem]" src={picture.url} alt={name} />
+                <img key={name} className="w-10 h-14 object-contain md:max-w-[8rem]" src={picture.url} alt={name} />
             ))
           }
         </Slider>
