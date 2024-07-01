@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    min-height: 60vh;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    /* lg */
+    .modal-content {
+      width: 60%;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* md */
+    .modal-content {
+      width: 70%;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    /* mobile */
+    .modal-content {
+      width: 90%;
+    }
+  }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ImageSkeleton } from "../skeleton/member-card-skeleton";
+import Modal from 'react-modal';
 
 interface MemberCard {
     loading?: boolean;
@@ -15,15 +16,28 @@ interface MemberCard {
       description: string;    
 }
 
+Modal.setAppElement('#root'); 
+
+
+interface MyModalProps {
+    isOpen: boolean;
+    onRequestClose?: () => void;
+    contentLabel: string;
+  }
+  
+
 const MemberCard  = ({name, picture, role, degree, description, loading}:MemberCard) => {
     
-    const [open, setOpen] = useState(true);
-    const open_toggle = () => {
-        setOpen(!open);
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+    const openModel = () => {
+        setModalIsOpen(true);
     }
+    const closeModel = () => {
+        setModalIsOpen(false);
+     }
 
     return (
-        <div className="">
+        <div className="focus-visible:border-2">
             <figure key={name} className="text-white-1 md:h-[22rem] h-full  relative mx-auto w-[90%] md:w-full max-w-[25rem]">
                 <div className="">
                     {
@@ -42,18 +56,40 @@ const MemberCard  = ({name, picture, role, degree, description, loading}:MemberC
                             <h4 className="text-sm md:text-[.8rem]"> {role} </h4>
                             <h4 className="text-xs md:text-xs"> {degree} </h4>
                         </div>
-                        <div onClick={open_toggle} className="">
-                            <button  className="font-bold text-sm">Read more</button>
+                        <div onClick={openModel} className="">
+                            <button  className="font-bold text-sm focus-visible:outline-dotted">Read more</button>
                         </div>
                     </div>
                 </figcaption>
             </figure>
-            <div onClick={open_toggle} className= { open ? "hidden" : "z-50  fixed top-0 left-0 bg-slate-800 bg-opacity-50 w-[100vw] min-h-[100vh] flex items-center justify-center"}>
-                <div className="relative w-[90%] lg:w-[60%] md:w-[70%] md:min-h-[60vh] rounded-xl bg-primary py-6">
-                    <div onClick={open_toggle} className="absolute top-2 right-3">
-                        <button className="text-2xl py-0 px-3 rounded-full bg-secondary text-primary">x</button>
+            <Modal
+
+                isOpen={modalIsOpen}
+                onRequestClose={closeModel}
+                shouldCloseOnEsc={true}
+                shouldCloseOnOverlayClick={true}
+                contentLabel="Example Modal"
+                className="modal-content"
+
+                style={{
+                    overlay: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    minHeight: "100vh",
+                    display: "grid",
+                    placeItems: "center",
+                    paddingTop: "5rem",
+                    },
+                    content: {
+                        padding: "0"
+                    }
+                }}
+            >
+
+                <div className="bg-primary rounded-xl py-3">
+                    <div onClick={closeModel} className="absolute top-2 right-3">
+                        <button className="text-2xl py-0 px-3 rounded-full text-red-950">x</button>
                     </div>
-                    <figure className="flex flex-col items-center justify-center my-4 mx-5 space-y-4 ">
+                    <figure className="flex flex-col items-center justify-center my-4 mx-5 space-y-4 bg-gre">
                         <div className="">
                             <img className="w-[10rem] h-[10rem] rounded-full object-cover object-top" src={picture.url} alt={name} />
                         </div>
@@ -64,7 +100,9 @@ const MemberCard  = ({name, picture, role, degree, description, loading}:MemberC
                             </div>
                             <div className="font-light space-y-1">
                                 <h4 className="text-sm"> {role} </h4>
-                                <h4 className="text-xs md:text-sm"> {degree} </h4>
+                                {
+                                    degree && <h4 className="text-xs"> {degree} </h4>
+                                }
                             </div>
                             <div className="px-2 md:px-12 py-4 text-justify leading-7">
                                 <p className=""> {description} </p>
@@ -72,9 +110,8 @@ const MemberCard  = ({name, picture, role, degree, description, loading}:MemberC
                         </figcaption>
                     </figure>
                 </div>
-            </div>
+            </Modal>
         </div>
-         
      );
 }
  
