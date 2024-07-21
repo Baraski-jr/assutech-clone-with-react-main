@@ -10,6 +10,9 @@ import RecentProductCard from "../Components/UI/cards/recent-product-card";
 import ContactForm from "../Components/UI/cards/contact-form";
 import { gql, useQuery } from "@apollo/client";
 import HomeHero from "../Components/UI/hero/home-hero";
+import CountUp from "react-countup";
+import VisibilitySensor from 'react-visibility-sensor';
+
 
 const QUERY = gql`
   query {
@@ -150,24 +153,36 @@ const Home = () => {
       </section>
       {/* Statistics */}
       <section className="py-8 min-h-[90vh] md:min-h-[70vh] flex flex-col justify-center items-center space-y-10">
-        <header className="text-center space-y-2 py-5">
-          <h4 className="text-primary">STATISTICS</h4>
-          <h2 className="font-semibold text-xl md:text-3xl">Honouring Our Journey</h2>
-        </header>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div className="text-center text-lg font-semibold">
-            <h1 className="text-primary font-bold text-4xl md:text-6xl">20+</h1>
-            <p className="">AssuTechies on board</p>
-          </div>
-          <div className="text-center text-lg font-semibold">
-            <h1 className="text-primary font-bold text-4xl md:text-6xl">50+</h1>
-            <p className="">Delivered projects</p>
-          </div>
-          <div className="text-center text-lg font-semibold">
-            <h1 className="text-primary font-bold text-4xl md:text-6xl">12+</h1>
-            <p className="">Years of experience</p>
-          </div>
-        </div>
+        <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
+          {({ isVisible }: { isVisible: boolean }) => (
+            <>
+              <header className="text-center space-y-2 py-5">
+                <h4 className="text-primary">STATISTICS</h4>
+                <h2 className="font-semibold text-xl md:text-3xl">Honouring Our Journey</h2>
+              </header>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="text-center text-lg font-semibold">
+                  <h1 className="text-primary font-bold text-4xl md:text-6xl">
+                    {isVisible ? <CountUp duration={2.75} delay={0.5} suffix="+" end={20} /> : null}
+                  </h1>
+                  <p className="">AssuTechies on board</p>
+                </div>
+                <div className="text-center text-lg font-semibold">
+                  <h1 className="text-primary font-bold text-4xl md:text-6xl">
+                    {isVisible ? <CountUp duration={2.75} delay={0.5} suffix="+" end={50} /> : null}
+                  </h1>
+                  <p className="">Delivered projects</p>
+                </div>
+                <div className="text-center text-lg font-semibold">
+                  <h1 className="text-primary font-bold text-4xl md:text-6xl">
+                    {isVisible ? <CountUp duration={2.75} delay={0.5} suffix="+" end={12} /> : null}
+                  </h1>
+                  <p className="">Years of experience</p>
+                </div>
+              </div>
+            </>
+          )}
+        </VisibilitySensor>
       </section>
       {/* CONTACT FORM */}
       <section className="bg-primary py-10 lg:py-[5rem]">
