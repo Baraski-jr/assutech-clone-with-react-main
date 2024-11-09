@@ -19,11 +19,11 @@ interface MemberCard {
 Modal.setAppElement('#root'); 
 
 
-interface MyModalProps {
-    isOpen: boolean;
-    onRequestClose?: () => void;
-    contentLabel: string;
-  }
+// interface MyModalProps {
+//     isOpen: boolean;
+//     onRequestClose?: () => void;
+//     contentLabel: string;
+//   }
   
 
 const MemberCard  = ({name, picture, role, degree, description, loading}:MemberCard) => {

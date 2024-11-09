@@ -1,5 +1,6 @@
 import assutechLogo from "../assets/icons/Logos/Assutech.png";
 import { Link } from "react-router-dom";
+import NoPage from "../pages/NoPage";
 
 
 
@@ -38,12 +39,14 @@ const Header = () => {
         <div className="bg-primary bg-opacity-80">
           <div className="container w-[95%] md:w-[93%] md:max-w-[80%] lg:max-w-[90rem] mx-auto py-5 px-5">
             <nav className="container md:max-w-[74rem] lg:max-w-[90rem] mx-auto flex justify-between gap-4 md:grid md:grid-cols-1 lg:grid-cols-2 lg:flex lg:gap-10 items-center">
-              <img className="" src={assutechLogo} alt="Assutech Logo" />
+              <Link to='/' >
+                <img className="" src={assutechLogo} alt="Assutech Logo" />
+              </Link>
               <div className="md:w-full">
                 <i className="fa-solid fa-bars text-secondary md:hidden"></i>
                 <div className="ml-auto lg:w-[90%] xl:w-[70%] justify-between md:gap-4 lg:gap-4 space-x-0 md:flex items-center">
                   {navLinks.map(({ name, id, url }) => {
-                    if (url === "*") return null;
+                    if (url === "*") return <NoPage />;
                     return (
                       <Link
                         key={id}

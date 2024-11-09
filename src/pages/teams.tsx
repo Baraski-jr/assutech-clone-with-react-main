@@ -21,14 +21,10 @@ const Team = () => {
   
   const { data, error, loading } = useQuery(QUERY)
   
-  if (error) {
-    console.log(error)
-  }
-  else {
-    console.log(data?.assutechTeamsCollection?.items)
-  }
+  if (error) { console.log(error) }
+  else { console.log(data?.assutechTeamsCollection?.items) }
 
- 
+
   return (  
     <div className="min-h-[95vh] space-y-1">
 
