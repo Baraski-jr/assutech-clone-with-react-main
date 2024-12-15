@@ -13,7 +13,6 @@ import HomeHero from "../Components/UI/hero/home-hero";
 import CountUp from "react-countup";
 import VisibilitySensor from 'react-visibility-sensor';
 
-
 const QUERY = gql`
   query {
     blogPostCollection {
@@ -51,7 +50,7 @@ const Home = () => {
         <ScrollLogos />
       </section>
       {/* Second Section */}
-      <section id="solution" className="space-y-7 container max-w-[90%] mad:max-w[90%] lg:max-w-[90rem] mx-auto min-h-[85vh] px-5 pb-12 bg-secondary">
+      <section id="solution" className="space-y-7 container max-w-[90%] mad:max-w[90%] lg:max-w-[90rem] mx-auto min-h-[85vh] portrait:md:min-h-[50dvh] px-5 pb-12 bg-secondary">
         <div className="">
           <CenterHeader mainTitleOne={"Customer-focused solutions that"} mainTitleTwo={"run on all devices. Anywhere."} subTitle={"CUSTOM SOLUTIONS WE PROVIDE"} />
         </div>
@@ -59,7 +58,7 @@ const Home = () => {
           <Tools />
         </div>
       </section>
-      <section className="after:absolute after:w-full after:py-[.8rem] after:bg-rose-200 after:-bottom-4 after:-rotate-[.7deg] after:z-10 min-h-[70vh] pb-12 lg:flex flex-wrap py-28 relative bg-thirdiary">
+      <section className="after:absolute after:w-full after:py-[.8rem] after:bg-rose-200 after:-bottom-4 after:-rotate-[.7deg] after:z-10 min-h-[70dvh] portrait:md:min-h-[45dvh]  pb-12 lg:flex flex-wrap py-28 relative bg-thirdiary">
         <div className="container w-[95%] md:w-[85%] mad:max-w[90%] lg:max-w-[95rem] mx-auto">
           <div className="flex flex-wrap space-y-5 md:space-y-0">
             <div className="md:w-full lg:w-5/12 space-y-3">
@@ -81,7 +80,7 @@ const Home = () => {
       {/* WatooTijay Third Section */}
       <section className="z-20 bg-rose-200 bg-opacity-50 relative">
           <div className=" bg-watooTijay mix-blend-multiply bg-cover">
-          <div className="flex flex-col justify-center container max-w-[90%] md:w-[85%] mad:max-w[90%] lg:max-w-[90rem] mx-auto min-h-[70vh] px-5 py-12">
+          <div className="flex flex-col justify-center container max-w-[90%] md:w-[85%] mad:max-w[90%] lg:max-w-[90rem] mx-auto min-h-[40dvh] portrait:md:min-h-[20dvh] px-5 py-12">
             <div className="text-secondary space-y-2">
               <p className="font-medium">#WatooTijay</p>
               <div className="font-semibold md:text-[3.5rem] text-[2.1rem] md:leading-1.3">
@@ -97,14 +96,12 @@ const Home = () => {
       </section>
       {/* Testimonial Fouth Section */}
       <section className="">
-        <div className="min-h-[85vh] md:min-h-[60vh] lg:min-h-[85vh] flex flex-col justify-center">
-          <div className="space-y-5">
+        <div className="min-h-[55vh] md:min-h-[60vh] lg:min-h-[85vh] portrait:md:min-h-[30dvh] flex flex-col justify-center">
+          <div className="space-y-5 portrait:lg:space-y-2">
             <div className="px-4 lg:pb-14">
               <CenterHeader mainTitleOne={"Stories of Satisfaction"} subTitle={"CUSTOMER REVIEWS"} />
             </div>
-            <div className="">
-              <TestimonialCard />
-            </div>
+            <TestimonialCard />
           </div>
         </div>
       </section>
@@ -112,7 +109,7 @@ const Home = () => {
       <section className="bg-primary">
         <div className="bg-wavePattern bg-90% bg-right-top bg-no-repeat">
           <div className="bg-primary bg-opacity-80">
-            <div className="container w-[95%] mad:max-w[90%] md:w-[85%] lg:max-w-[90rem] mx-auto min-h-[95vh] py-5">
+            <div className="container w-[95%] mad:max-w[90%] md:w-[85%] lg:max-w-[90rem] mx-auto min-h-[95vh] py-5 portrait:md:min-h-[50dvh] ">
               <div className="">
                 <div className="space-y-5 text-secondary pt-10 ">
                   <LeftHeader mainTitle={"We love talking tech. If you do too, this may be the space for you."} subTitle={"TECH TALKS"} subTitleColor={"#fff"} />
@@ -137,6 +134,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {/* Think Big */}
       <section className="">
         <figure className="bg-primary">
           <div className="">
@@ -152,28 +150,28 @@ const Home = () => {
         </figure>
       </section>
       {/* Statistics */}
-      <section className="py-8 min-h-[90vh] md:min-h-[70vh] flex flex-col justify-center items-center space-y-10">
+      <section className="py-8 min-h-[50dvh] md:min-h-[70dvh] portrait:md:min-h-[25dvh]  flex flex-col justify-center items-center space-y-10">
         <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
           {({ isVisible }: { isVisible: boolean }) => (
             <>
               <header className="text-center space-y-2 py-5">
-                <h4 className="text-primary">STATISTICS</h4>
+                <h4 className="text-primary text-sm">STATISTICS</h4>
                 <h2 className="font-semibold text-xl md:text-3xl">Honouring Our Journey</h2>
               </header>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div className="text-center text-lg font-semibold">
+                <div className="text-center text-lg text-slate-700 space-y-3">
                   <h1 className="text-primary font-bold text-4xl md:text-6xl">
                     {isVisible ? <CountUp duration={2.75} delay={0.5} suffix="+" end={20} /> : null}
                   </h1>
                   <p className="">AssuTechies on board</p>
                 </div>
-                <div className="text-center text-lg font-semibold">
+                <div className="text-center text-lg text-slate-700 space-y-3">
                   <h1 className="text-primary font-bold text-4xl md:text-6xl">
                     {isVisible ? <CountUp duration={2.75} delay={0.5} suffix="+" end={50} /> : null}
                   </h1>
                   <p className="">Delivered projects</p>
                 </div>
-                <div className="text-center text-lg font-semibold">
+                <div className="text-center text-lg text-slate-700 space-y-3">
                   <h1 className="text-primary font-bold text-4xl md:text-6xl">
                     {isVisible ? <CountUp duration={2.75} delay={0.5} suffix="+" end={12} /> : null}
                   </h1>
@@ -186,7 +184,7 @@ const Home = () => {
       </section>
       {/* CONTACT FORM */}
       <section className="bg-primary py-10 lg:py-[5rem]">
-        <div className=" contain w-[90%] md:w-[85%] mx-auto min-h-[80vh] lg:min-h-[90vh] grid lg:grid-cols-2 place-content-center">
+        <div className=" contain w-[90%] md:w-[85%] mx-auto min-h-[80vh] lg:min-h-[90vh] portrait:md:min-h-[40dvh]  grid lg:grid-cols-2 place-content-center">
           {/* Left side */}
           <div className="flex flex-col justify-between md:h-[70%]">
             <header className="space-y-5 text-secondary uppercase ">
@@ -213,9 +211,7 @@ const Home = () => {
             </div>
           </div>
           {/* Left side */}
-          <div className="">
-            <ContactForm />
-          </div>
+          <ContactForm />
         </div>
       </section>
     </main>

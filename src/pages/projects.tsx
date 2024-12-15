@@ -36,19 +36,16 @@ const Projects = () => {
       </section>
       
       {/* Cards section */}
-      <section className="container w-[80%] md:w-[90%] md:max-w-[74rem] lg:max-w-[90rem] mx-auto py-5 md:py-8">
-        <div className="">
-          {
-            loading ? <ProjectCardSkeleton /> :
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-              {
-                data?.assutechCaseStudiesCollection.items.map(({mainTitle, subTitle, solutionPicture, urls, tags}:ProjectCard) => (
-                <ProjectCard key={mainTitle}  mainTitle={mainTitle} subTitle={subTitle} solutionPicture={solutionPicture} urls={urls} tags={tags} loading={loading} />
-                ))
-              }
-            </div>
-          }
-        </div>
+      <section className="container w-[80%] md:w-[90%] md:max-w-[74rem] lg:max-w-[90rem] mx-auto py-5 md:py-8 portrait:pt-[5rem]">
+        { loading ? <ProjectCardSkeleton /> :
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            {
+              data?.assutechCaseStudiesCollection.items.map(({mainTitle, subTitle, solutionPicture, urls, tags}:ProjectCard) => (
+              <ProjectCard key={mainTitle}  mainTitle={mainTitle} subTitle={subTitle} solutionPicture={solutionPicture} urls={urls} tags={tags} loading={loading} />
+              ))
+            }
+          </div>
+        }
       </section>
     </div>
   );

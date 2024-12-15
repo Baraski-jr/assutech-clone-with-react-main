@@ -3,7 +3,7 @@ import Button from "../../buttons";
 const HomeHero = () => {
     return ( 
         <div className="bg-wavePattern bg-80% bg-right-top bg-no-repeat">
-          <div className="bg-primary bg-opacity-80 pt-[10rem] md:pt-[9rem] lg:pt-[6rem] px-5 min-h-[85vh] md:min-h-[85vh] mg:bg-slate-500">
+          <div className="bg-primary bg-opacity-80 pt-[10rem] md:pt-[9rem] lg:pt-[9rem] px-5 min-h-[85vh] max-h-[10rem] md:min-h-[85vh] portrait:lg:min-h-[40dvh] mg:bg-slate-500">
             <div className="container md:w-[90%] mad:max-w[90%] lg:max-w-[90rem] mx-auto text-secondary space-y-9 md:space-y-6 lg:space-y-5">
               <h1 className="font-bold text-2xl md:text-5xl lg:text-6xl xl:text-[4rem] lg:pr-4">
                 Fit-for-purpose software solutions that deliver business goals
